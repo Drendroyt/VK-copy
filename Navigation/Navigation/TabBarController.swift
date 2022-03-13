@@ -25,9 +25,9 @@ class TabBarController: UITabBarController {
         var image: UIImage? {
             switch self {
             case .feed:
-                return UIImage(systemName: "house")
+                return UIImage(systemName: "house.circle")
             case .profile:
-                return UIImage(systemName: "person")
+                return UIImage(systemName: "person.circle")
             }
         }
     }
@@ -35,8 +35,6 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTabBar()
-
-        // Do any additional setup after loading the view.
     }
 
     private func setupTabBar() {

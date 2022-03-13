@@ -12,6 +12,7 @@
 		896AD69A27D334DC00D70511 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 896AD69927D334DC00D70511 /* Assets.xcassets */; };
 		896AD69D27D334DC00D70511 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896AD69B27D334DC00D70511 /* LaunchScreen.storyboard */; };
 		F55341C727DCDB3E0070895E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55341C627DCDB3E0070895E /* TabBarController.swift */; };
+		F58E36A127DCFFA600A4060E /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58E36A027DCFFA600A4060E /* PostViewController.swift */; };
 		F59F4EFF27DCF74C000FAE6A /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F4EFE27DCF74C000FAE6A /* FeedViewController.swift */; };
 		F59F4F0127DCF75B000FAE6A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F4F0027DCF75B000FAE6A /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,7 @@
 		896AD69C27D334DC00D70511 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		896AD69E27D334DC00D70511 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F55341C627DCDB3E0070895E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		F58E36A027DCFFA600A4060E /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		F59F4EFE27DCF74C000FAE6A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		F59F4F0027DCF75B000FAE6A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +65,7 @@
 				F55341C627DCDB3E0070895E /* TabBarController.swift */,
 				F59F4EFE27DCF74C000FAE6A /* FeedViewController.swift */,
 				F59F4F0027DCF75B000FAE6A /* ProfileViewController.swift */,
+				F58E36A027DCFFA600A4060E /* PostViewController.swift */,
 				896AD69927D334DC00D70511 /* Assets.xcassets */,
 				896AD69B27D334DC00D70511 /* LaunchScreen.storyboard */,
 				896AD69E27D334DC00D70511 /* Info.plist */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F58E36A127DCFFA600A4060E /* PostViewController.swift in Sources */,
 				F55341C727DCDB3E0070895E /* TabBarController.swift in Sources */,
 				896AD69127D334DB00D70511 /* AppDelegate.swift in Sources */,
 				F59F4F0127DCF75B000FAE6A /* ProfileViewController.swift in Sources */,
@@ -287,6 +291,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Navigation;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -300,7 +305,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -313,6 +318,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Navigation;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -326,7 +332,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

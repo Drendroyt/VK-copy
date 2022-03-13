@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  PostViewController.swift
 //  Navigation
 //
 //  Created by Кирилл Дамковский on 12.03.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,11 +17,11 @@ class ProfileViewController: UIViewController {
 
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        self.navigationItem.title = "Профиль"
+        self.navigationItem.title = "Пост"
     }
 
     private func setupView() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemGreen
     }
 
 }
