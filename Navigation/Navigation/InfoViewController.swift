@@ -1,35 +1,22 @@
 //
-//  FeedViewController.swift
+//  InfoViewController.swift
 //  Navigation
 //
-//  Created by Кирилл Дамковский on 12.03.2022.
+//  Created by Кирилл Дамковский on 13.03.2022.
 //
 
 import UIKit
 
-class FeedViewController: UIViewController {
-
-    private struct Post {
-        var title: String
-    }
-
-    private let newPost = Post(title: "Мой пост")
+class InfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupNavigationBar()
         self.setupView()
-
     }
-
-    private func setupNavigationBar() {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Лента"
-    }
-
+    
     private func setupView() {
-        self.view.backgroundColor = .white
-        self.view.addSubview(self.postButton)
+        self.view.backgroundColor = .systemGreen
+        self.view.addSubview(postButton)
         self.activateConstrains()
     }
 
@@ -38,9 +25,9 @@ class FeedViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.backgroundColor = .systemYellow
-        button.setTitle("Открыть пост", for: .normal)
+        button.setTitle("Показать алерт", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(didTapPostButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapAlertButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -52,9 +39,12 @@ class FeedViewController: UIViewController {
         self.postButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 
-    @objc private func didTapPostButton() {
-        let postVC = PostViewController()
-        postVC.postTitle = newPost.title
-        self.navigationController?.pushViewController(postVC, animated: true)
+    @objc private func didTapAlertButton() {
+        let alert = UIAlertController(title: "Внимание", message: "Вам необходимо выбрать", preferredStyle: .actionSheet)
+        let confirmAction = UIAlertAction(title: "Вывод в консоль", style: .default, handler: { action in print("user taped confirm button")} )
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: { action in self.dismiss(animated: true, completion: nil)})
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
     }
 }

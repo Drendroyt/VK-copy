@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
     }
 
     private func setupNavigationBar() {
-        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Профиль"
     }
 
