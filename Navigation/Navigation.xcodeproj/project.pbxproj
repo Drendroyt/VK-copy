@@ -15,6 +15,7 @@
 		F58E36A127DCFFA600A4060E /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58E36A027DCFFA600A4060E /* PostViewController.swift */; };
 		F59F4EFF27DCF74C000FAE6A /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F4EFE27DCF74C000FAE6A /* FeedViewController.swift */; };
 		F59F4F0127DCF75B000FAE6A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F4F0027DCF75B000FAE6A /* ProfileViewController.swift */; };
+		F5A5958727E7863000A84F58 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A5958627E7863000A84F58 /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		F58E36A027DCFFA600A4060E /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		F59F4EFE27DCF74C000FAE6A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		F59F4F0027DCF75B000FAE6A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F5A5958627E7863000A84F58 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				896AD69027D334DB00D70511 /* AppDelegate.swift */,
+				F5A5958627E7863000A84F58 /* InfoViewController.swift */,
 				896AD69227D334DB00D70511 /* SceneDelegate.swift */,
 				F55341C627DCDB3E0070895E /* TabBarController.swift */,
 				F59F4EFE27DCF74C000FAE6A /* FeedViewController.swift */,
@@ -146,6 +149,7 @@
 				F58E36A127DCFFA600A4060E /* PostViewController.swift in Sources */,
 				F55341C727DCDB3E0070895E /* TabBarController.swift in Sources */,
 				896AD69127D334DB00D70511 /* AppDelegate.swift in Sources */,
+				F5A5958727E7863000A84F58 /* InfoViewController.swift in Sources */,
 				F59F4F0127DCF75B000FAE6A /* ProfileViewController.swift in Sources */,
 				F59F4EFF27DCF74C000FAE6A /* FeedViewController.swift in Sources */,
 				896AD69327D334DB00D70511 /* SceneDelegate.swift in Sources */,
