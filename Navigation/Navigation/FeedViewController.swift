@@ -24,7 +24,7 @@ class FeedViewController: UIViewController {
 
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Лента"
+        self.navigationItem.title = "Feed"
     }
 
     private func setupView() {
