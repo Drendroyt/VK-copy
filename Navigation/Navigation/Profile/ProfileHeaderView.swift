@@ -17,6 +17,7 @@ class ProfileHeaderView: UIView {
         contentStack.addArrangedSubview(labelStack)
         labelStack.addArrangedSubview(nameLabel)
         labelStack.addArrangedSubview(statusLabel)
+        labelStack.addArrangedSubview(statusTextField)
     }
 
     required init?(coder: NSCoder) {
@@ -38,7 +39,7 @@ class ProfileHeaderView: UIView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.alignment = .fill
+        stackView.alignment = .top
         stackView.distribution = .fill
         stackView.spacing = 10
         return stackView
@@ -67,7 +68,7 @@ class ProfileHeaderView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fillEqually
         return stackView
     }()
 
@@ -88,7 +89,7 @@ class ProfileHeaderView: UIView {
         let button = UIButton()
         button.layer.cornerRadius = 4
         button.backgroundColor = .blue
-        button.setTitle("Show status", for: .normal)
+        button.setTitle("Set status", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(didTapStatusButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -100,7 +101,32 @@ class ProfileHeaderView: UIView {
     }()
 
     @objc private func didTapStatusButton() {
-        print(statusLabel.text ?? "Статус пустой")
+        print("Статус до изменения: \(statusLabel.text ?? "Статус пустой")")
+        statusLabel.text = statusText
+        print("Статус после изменения: \(statusLabel.text ?? "Статус пустой")")
+        self.endEditing(true)
     }
 
+    private var statusText: String?
+
+    lazy var statusTextField: UITextField = {
+        let textField = UITextField()
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 12
+        textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        textField.textColor = .black
+        textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
+        return textField
+    }()
+
+    @objc private func statusTextChanged() {
+        let newStatusText = statusTextField.text
+        statusText = newStatusText
+    }
 }
