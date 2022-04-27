@@ -18,6 +18,7 @@ class ProfileHeaderView: UIView {
         labelStack.addArrangedSubview(nameLabel)
         labelStack.addArrangedSubview(statusLabel)
         labelStack.addArrangedSubview(statusTextField)
+        activateConstraints()
     }
 
     required init?(coder: NSCoder) {

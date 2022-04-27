@@ -22,7 +22,6 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(profileView)
         self.view.addSubview(mysteriousButton)
         activateConstraints()
-        profileView.activateConstraints()
         profileView.statusTextField.delegate = self
     }
 
