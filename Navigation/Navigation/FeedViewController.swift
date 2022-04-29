@@ -29,9 +29,20 @@ class FeedViewController: UIViewController {
 
     private func setupView() {
         self.view.backgroundColor = .white
-        self.view.addSubview(self.postButton)
+        self.view.addSubview(buttonStackView)
+        buttonStackView.addArrangedSubview(postButton)
+        buttonStackView.addArrangedSubview(anotherPostButton)
         self.activateConstrains()
     }
+
+    private lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.alignment = .fill
+        return stackView
+    }()
 
     private lazy var postButton: UIButton = {
         let button = UIButton()
@@ -45,11 +56,27 @@ class FeedViewController: UIViewController {
         return button
     }()
 
+    private lazy var anotherPostButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.backgroundColor = .systemYellow
+        button.setTitle("Открыть пост", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(didTapPostButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     private func activateConstrains() {
-        self.postButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        self.postButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
-        self.postButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
-        self.postButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        NSLayoutConstraint.activate([
+            buttonStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            buttonStackView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            buttonStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            postButton.heightAnchor.constraint(equalToConstant: 50),
+            anotherPostButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 
     @objc private func didTapPostButton() {
