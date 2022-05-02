@@ -17,20 +17,20 @@ class LogInViewController: UIViewController {
         return scrollView
       }()
 
-    private let contentView: UIView = {
+    private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
       }()
 
-    private let logoImage: UIImageView = {
+    private lazy var logoImage: UIImageView = {
         let logoImage = UIImage(named: "VKLogo")
         let imageView = UIImageView(image: logoImage)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-    private let loginInpunt: UITextField = {
+    private lazy var loginInpunt: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .systemGray6
@@ -49,7 +49,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
 
-    private let passwordInput: UITextField = {
+    private lazy var passwordInput: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .systemGray6
@@ -69,7 +69,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
 
-    private let inputStackView: UIStackView = {
+    private lazy var inputStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -77,7 +77,7 @@ class LogInViewController: UIViewController {
         return stackView
     }()
 
-    private let logInButton: UIButton = {
+    private lazy var logInButton: UIButton = {
         let button = UIButton()
         let backgroundImage = UIImage(named: "bluePixel")
         button.translatesAutoresizingMaskIntoConstraints = false

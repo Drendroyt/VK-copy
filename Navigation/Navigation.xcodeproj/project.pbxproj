@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8928D7E4281C5532007702E9 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928D7E3281C5532007702E9 /* LogInViewController.swift */; };
+		893B61A5281EF23300664B5D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B61A4281EF23300664B5D /* Post.swift */; };
+		893B61A7281EFAFF00664B5D /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B61A6281EFAFF00664B5D /* PostTableViewCell.swift */; };
+		893B61A9281F05C600664B5D /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B61A8281F05C600664B5D /* UIViewExtension.swift */; };
 		896AD69127D334DB00D70511 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896AD69027D334DB00D70511 /* AppDelegate.swift */; };
 		896AD69327D334DB00D70511 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896AD69227D334DB00D70511 /* SceneDelegate.swift */; };
 		896AD69A27D334DC00D70511 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 896AD69927D334DC00D70511 /* Assets.xcassets */; };
@@ -24,6 +27,9 @@
 
 /* Begin PBXFileReference section */
 		8928D7E3281C5532007702E9 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		893B61A4281EF23300664B5D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		893B61A6281EFAFF00664B5D /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		893B61A8281F05C600664B5D /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		896AD68D27D334DB00D70511 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		896AD69027D334DB00D70511 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		896AD69227D334DB00D70511 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,8 +78,11 @@
 			children = (
 				89D02562281D6A4F0070C1AF /* UIImageAlphaExtension.swift */,
 				89D02564281D7C220070C1AF /* UIViewControllerExtension.swift */,
+				893B61A8281F05C600664B5D /* UIViewExtension.swift */,
 				896AD69027D334DB00D70511 /* AppDelegate.swift */,
+				893B61A6281EFAFF00664B5D /* PostTableViewCell.swift */,
 				F5A5958627E7863000A84F58 /* InfoViewController.swift */,
+				893B61A4281EF23300664B5D /* Post.swift */,
 				F5A5958827E7892000A84F58 /* Profile */,
 				896AD69227D334DB00D70511 /* SceneDelegate.swift */,
 				F55341C627DCDB3E0070895E /* TabBarController.swift */,
@@ -168,7 +177,10 @@
 			files = (
 				F58E36A127DCFFA600A4060E /* PostViewController.swift in Sources */,
 				F55341C727DCDB3E0070895E /* TabBarController.swift in Sources */,
+				893B61A7281EFAFF00664B5D /* PostTableViewCell.swift in Sources */,
 				89D02563281D6A4F0070C1AF /* UIImageAlphaExtension.swift in Sources */,
+				893B61A9281F05C600664B5D /* UIViewExtension.swift in Sources */,
+				893B61A5281EF23300664B5D /* Post.swift in Sources */,
 				8928D7E4281C5532007702E9 /* LogInViewController.swift in Sources */,
 				896AD69127D334DB00D70511 /* AppDelegate.swift in Sources */,
 				F5A5958727E7863000A84F58 /* InfoViewController.swift in Sources */,
