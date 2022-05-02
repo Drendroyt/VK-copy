@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8928D7E4281C5532007702E9 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928D7E3281C5532007702E9 /* LogInViewController.swift */; };
 		896AD69127D334DB00D70511 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896AD69027D334DB00D70511 /* AppDelegate.swift */; };
 		896AD69327D334DB00D70511 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896AD69227D334DB00D70511 /* SceneDelegate.swift */; };
 		896AD69A27D334DC00D70511 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 896AD69927D334DC00D70511 /* Assets.xcassets */; };
 		896AD69D27D334DC00D70511 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896AD69B27D334DC00D70511 /* LaunchScreen.storyboard */; };
+		89D02563281D6A4F0070C1AF /* UIImageAlphaExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D02562281D6A4F0070C1AF /* UIImageAlphaExtension.swift */; };
+		89D02565281D7C220070C1AF /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D02564281D7C220070C1AF /* UIViewControllerExtension.swift */; };
 		F55341C727DCDB3E0070895E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55341C627DCDB3E0070895E /* TabBarController.swift */; };
 		F58E36A127DCFFA600A4060E /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58E36A027DCFFA600A4060E /* PostViewController.swift */; };
 		F59F4EFF27DCF74C000FAE6A /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F4EFE27DCF74C000FAE6A /* FeedViewController.swift */; };
@@ -20,12 +23,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8928D7E3281C5532007702E9 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		896AD68D27D334DB00D70511 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		896AD69027D334DB00D70511 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		896AD69227D334DB00D70511 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		896AD69927D334DC00D70511 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		896AD69C27D334DC00D70511 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		896AD69E27D334DC00D70511 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89D02562281D6A4F0070C1AF /* UIImageAlphaExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIImageAlphaExtension.swift; path = Profile/UIImageAlphaExtension.swift; sourceTree = "<group>"; };
+		89D02564281D7C220070C1AF /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		F55341C627DCDB3E0070895E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F58E36A027DCFFA600A4060E /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		F59F4EFE27DCF74C000FAE6A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +70,8 @@
 		896AD68F27D334DB00D70511 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				89D02562281D6A4F0070C1AF /* UIImageAlphaExtension.swift */,
+				89D02564281D7C220070C1AF /* UIViewControllerExtension.swift */,
 				896AD69027D334DB00D70511 /* AppDelegate.swift */,
 				F5A5958627E7863000A84F58 /* InfoViewController.swift */,
 				F5A5958827E7892000A84F58 /* Profile */,
@@ -83,6 +91,7 @@
 			children = (
 				F5A5958927E7898400A84F58 /* ProfileHeaderView.swift */,
 				F59F4F0027DCF75B000FAE6A /* ProfileViewController.swift */,
+				8928D7E3281C5532007702E9 /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -159,11 +168,14 @@
 			files = (
 				F58E36A127DCFFA600A4060E /* PostViewController.swift in Sources */,
 				F55341C727DCDB3E0070895E /* TabBarController.swift in Sources */,
+				89D02563281D6A4F0070C1AF /* UIImageAlphaExtension.swift in Sources */,
+				8928D7E4281C5532007702E9 /* LogInViewController.swift in Sources */,
 				896AD69127D334DB00D70511 /* AppDelegate.swift in Sources */,
 				F5A5958727E7863000A84F58 /* InfoViewController.swift in Sources */,
 				F59F4F0127DCF75B000FAE6A /* ProfileViewController.swift in Sources */,
 				F59F4EFF27DCF74C000FAE6A /* FeedViewController.swift in Sources */,
 				896AD69327D334DB00D70511 /* SceneDelegate.swift in Sources */,
+				89D02565281D7C220070C1AF /* UIViewControllerExtension.swift in Sources */,
 				F5A5958A27E7898400A84F58 /* ProfileHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
