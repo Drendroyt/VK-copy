@@ -9,49 +9,63 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    private lazy var profileView: ProfileHeaderView = {
-        let view = ProfileHeaderView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .lightGray
-        return view
+    private lazy var profileTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.identifier)
+        tableView.allowsSelection = false
+        return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupNavigationBar()
-        self.view.addSubview(profileView)
-        self.view.addSubview(mysteriousButton)
         activateConstraints()
-        profileView.statusTextField.delegate = self
-    }
-
-    override func viewWillLayoutSubviews() {
     }
 
     private func activateConstraints() {
+
+        self.view.addSubview(profileTableView)
         NSLayoutConstraint.activate([
-            profileView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            profileView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            profileView.heightAnchor.constraint(equalToConstant: 220),
-            profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mysteriousButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            mysteriousButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            mysteriousButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            mysteriousButton.heightAnchor.constraint(equalToConstant: 50)
+            profileTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            profileTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+}
 
-    private func setupNavigationBar() {
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-        self.navigationItem.title = "Profile"
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
     }
 
-    private lazy var mysteriousButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Tap me", for: .normal)
-        button.backgroundColor = .blue
-        return button
-    }()
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.identifier) as! ProfileHeaderView
+            view.statusTextField.delegate = self
+            return view
+        } else {
+            return nil
+        }
+    }
 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        220
+    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return postArray.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+        cell.setupCell(postArray[indexPath.row])
+        return cell
+    }
+    
 }

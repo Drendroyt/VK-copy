@@ -7,33 +7,35 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileHeaderView: UITableViewHeaderFooterView {
 
-    override init(frame: CGRect) {
-        super .init(frame: frame)
-        self.addSubview(contentStack)
-        self.addSubview(statusButton)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        activateConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func activateConstraints() {
+
+        contentView.addSubview(contentStack)
+        contentView.addSubview(statusButton)
         contentStack.addArrangedSubview(avatarImage)
         contentStack.addArrangedSubview(labelStack)
         labelStack.addArrangedSubview(nameLabel)
         labelStack.addArrangedSubview(statusLabel)
         labelStack.addArrangedSubview(statusTextField)
-        activateConstraints()
-    }
 
-    required init?(coder: NSCoder) {
-        super .init(coder: coder)
-    }
-
-    func activateConstraints() {
-            contentStack.leadingAnchor.constraint(equalTo:self.leadingAnchor, constant: 16).isActive = true
-            contentStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-            contentStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
-            contentStack.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-            statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-            statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-            statusButton.topAnchor.constraint(equalTo: contentStack.bottomAnchor, constant: 16).isActive = true
-            statusButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        contentStack.leadingAnchor.constraint(equalTo:self.leadingAnchor, constant: 16).isActive = true
+        contentStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        contentStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
+        contentStack.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        statusButton.topAnchor.constraint(equalTo: contentStack.bottomAnchor, constant: 16).isActive = true
+        statusButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 
     private lazy var contentStack: UIStackView = {
@@ -57,7 +59,7 @@ class ProfileHeaderView: UIView {
 
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "Back to future"
+        label.text = "Waiting for something"
         label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -123,6 +125,7 @@ class ProfileHeaderView: UIView {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = paddingView
         textField.leftViewMode = .always
+        textField.placeholder = "Set your status..."
         return textField
     }()
 
