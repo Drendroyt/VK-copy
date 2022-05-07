@@ -17,7 +17,6 @@ class ProfileViewController: UIViewController {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.identifier)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
-        tableView.allowsSelection = false
         return tableView
     }()
 
@@ -58,6 +57,16 @@ extension ProfileViewController: UITableViewDelegate {
             return 220
         } else {
             return 0
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            tableView.deselectRow(at: indexPath, animated: true)
+            let detailVC = PhotosViewController()
+            navigationController?.pushViewController(detailVC, animated: true)
+        } else {
+            tableView.allowsSelection = false
         }
     }
 }

@@ -64,7 +64,7 @@ class PhotosTableViewCell: UITableViewCell {
             photosCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             photosCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             photosCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
-            photosCollection.heightAnchor.constraint(equalToConstant: 100)
+            photosCollection.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.25)
         ])
     }
 
@@ -74,7 +74,7 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     private var sideInset: CGFloat { return 8 }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.bounds.width - sideInset * 3) / 4
+        let width = (collectionView.bounds.width - sideInset * 4) / 4
         return CGSize(width: width, height: width)
     }
 }
@@ -89,6 +89,4 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
         cell.setupCell(photosArray[indexPath.item])
         return cell
     }
-
-
 }
