@@ -76,10 +76,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }
 
     @objc private func tapAvatarGesture() {
-        UIView.animate(withDuration: 0.5,
-                       delay: 0) {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5) {
-
+        UIView.animate(withDuration: 0.5) {
                 NSLayoutConstraint.deactivate([
                     self.topAvatar,
                     self.leadingAvatar,
@@ -102,13 +99,13 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
                 self.backView.alpha = 0.5
                 self.avatarImage.layer.cornerRadius = 0
                 self.layoutIfNeeded()
-            }
-            UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.5) {
-                print("анимация кнопки")
-                self.closeButton.alpha = 1
+            } completion: { _ in
+                UIView.animate(withDuration: 0.3,
+                               delay: 0) {
+                    self.closeButton.alpha = 1
+                }
             }
         }
-    }
 
     private lazy var backView: UIView = {
         let view = UIView()
@@ -213,6 +210,31 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }
 
     @objc private func tapCloseButton() {
-        //
-    }
+        self.closeButton.alpha = 0
+        UIView.animate(withDuration: 0.5,
+                       delay: 0) {
+                NSLayoutConstraint.deactivate([
+                    self.centerXAvatar,
+                    self.centerYAvatar,
+                    self.widthAvatar,
+                    self.heightAvatar
+                ])
+
+            self.leadingAvatar = self.avatarImage.leadingAnchor.constraint(equalTo:self.leadingAnchor, constant: 16)
+            self.topAvatar = self.avatarImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
+            self.widthAvatar = self.avatarImage.widthAnchor.constraint(equalToConstant: 100)
+            self.heightAvatar = self.avatarImage.heightAnchor.constraint(equalToConstant: 100)
+
+                NSLayoutConstraint.activate([
+                    self.topAvatar,
+                    self.leadingAvatar,
+                    self.widthAvatar,
+                    self.heightAvatar
+                ])
+
+                self.backView.alpha = 0
+                self.avatarImage.layer.cornerRadius = 50
+                self.layoutIfNeeded()
+            }
+        }
 }

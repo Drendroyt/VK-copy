@@ -65,8 +65,6 @@ extension ProfileViewController: UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
             let detailVC = PhotosViewController()
             navigationController?.pushViewController(detailVC, animated: true)
-        } else {
-            tableView.allowsSelection = false
         }
     }
 }
