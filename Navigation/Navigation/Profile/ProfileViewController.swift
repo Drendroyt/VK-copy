@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    private lazy var profileTableView: UITableView = {
+    lazy var profileTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
@@ -46,6 +46,7 @@ extension ProfileViewController: UITableViewDelegate {
         if section == 0 {
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.identifier) as! ProfileHeaderView
             view.statusTextField.delegate = self
+            view.delegate = self
             return view
         } else {
             return nil
