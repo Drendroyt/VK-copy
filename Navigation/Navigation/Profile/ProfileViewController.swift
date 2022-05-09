@@ -35,20 +35,6 @@ class ProfileViewController: UIViewController {
             profileTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-
-    private func setupGestures(_ view: UIView) {
-        let tapAvatarGesture = UITapGestureRecognizer(target: self, action: #selector(tapAvatarGesture))
-        view.addGestureRecognizer(tapAvatarGesture)
-    }
-
-    @objc private func tapAvatarGesture() {
-        UIView.animate(withDuration: 0.5) {
-            print("tap avatar")
-            let view = self.profileTableView.headerView(forSection: 0) as! ProfileHeaderView
-            view.leadingAvatar.constant += 50
-            self.view.layoutIfNeeded()
-        }
-    }
 }
 
 extension ProfileViewController: UITableViewDelegate {
@@ -60,8 +46,6 @@ extension ProfileViewController: UITableViewDelegate {
         if section == 0 {
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.identifier) as! ProfileHeaderView
             view.statusTextField.delegate = self
-            view.avatarImage.isUserInteractionEnabled = true
-            setupGestures(view.avatarImage)
             return view
         } else {
             return nil

@@ -12,6 +12,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         activateConstraints()
+        setupGestures()
     }
 
     required init?(coder: NSCoder) {
@@ -20,57 +21,110 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     var leadingAvatar = NSLayoutConstraint()
     var topAvatar = NSLayoutConstraint()
-    var trailingAvatar = NSLayoutConstraint()
-    var bottomAvatar = NSLayoutConstraint()
+    var widthAvatar = NSLayoutConstraint()
+    var heightAvatar = NSLayoutConstraint()
+    var centerXAvatar = NSLayoutConstraint()
+    var centerYAvatar = NSLayoutConstraint()
+    var centerAvatar = NSLayoutConstraint()
 
     func activateConstraints() {
-
-        contentView.addSubview(contentStack)
-        contentView.addSubview(statusButton)
-        backImageView.addSubview(avatarImage)
-        contentStack.addArrangedSubview(backImageView)
-        contentStack.addArrangedSubview(labelStack)
-        labelStack.addArrangedSubview(nameLabel)
-        labelStack.addArrangedSubview(statusLabel)
-        labelStack.addArrangedSubview(statusTextField)
-
-        contentStack.leadingAnchor.constraint(equalTo:self.leadingAnchor, constant: 16).isActive = true
-        contentStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-        contentStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
-        contentStack.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-        statusButton.topAnchor.constraint(equalTo: contentStack.bottomAnchor, constant: 16).isActive = true
-        statusButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
-        topAvatar = avatarImage.topAnchor.constraint(equalTo: backImageView.topAnchor)
-        leadingAvatar = avatarImage.leadingAnchor.constraint(equalTo: backImageView.leadingAnchor)
-        trailingAvatar = avatarImage.trailingAnchor.constraint(equalTo: backImageView.trailingAnchor)
-        bottomAvatar = avatarImage.bottomAnchor.constraint(equalTo: backImageView.bottomAnchor)
+        [labelStack, statusButton, backView, avatarImage, closeButton].forEach { contentView.addSubview($0) }
 
         NSLayoutConstraint.activate([
-            topAvatar,
-            leadingAvatar,
-            trailingAvatar,
-            bottomAvatar
+            backView.topAnchor.constraint(equalTo: self.topAnchor),
+            backView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            backView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            backView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height)
         ])
 
+        NSLayoutConstraint.activate([
+            closeButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            closeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+        ])
+
+        leadingAvatar = avatarImage.leadingAnchor.constraint(equalTo:self.leadingAnchor, constant: 16)
+        topAvatar = avatarImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
+        widthAvatar = avatarImage.widthAnchor.constraint(equalToConstant: 100)
+        heightAvatar = avatarImage.heightAnchor.constraint(equalToConstant: 100)
+
+        NSLayoutConstraint.activate([
+            leadingAvatar,
+            topAvatar,
+            widthAvatar,
+            heightAvatar
+        ])
+
+        [nameLabel, statusLabel, statusTextField].forEach { labelStack.addArrangedSubview($0) }
+
+        NSLayoutConstraint.activate([
+            labelStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            labelStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: (16 + 100 + 10)),
+            labelStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+        ])
+
+        NSLayoutConstraint.activate([
+            statusButton.topAnchor.constraint(equalTo: labelStack.bottomAnchor, constant: 16),
+            statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 
-    private lazy var backImageView: UIView = {
+    private func setupGestures() {
+        let tapAvatarGesture = UITapGestureRecognizer(target: self, action: #selector(tapAvatarGesture))
+        avatarImage.addGestureRecognizer(tapAvatarGesture)
+    }
+
+    @objc private func tapAvatarGesture() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5) {
+
+                NSLayoutConstraint.deactivate([
+                    self.topAvatar,
+                    self.leadingAvatar,
+                    self.widthAvatar,
+                    self.heightAvatar
+                ])
+
+                self.centerXAvatar = self.avatarImage.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+                self.centerYAvatar = self.avatarImage.centerYAnchor.constraint(equalTo: self.superview?.centerYAnchor ?? self.centerYAnchor)
+                self.widthAvatar = self.avatarImage.widthAnchor.constraint(equalTo: self.widthAnchor)
+                self.heightAvatar = self.avatarImage.heightAnchor.constraint(equalTo: self.widthAnchor)
+
+                NSLayoutConstraint.activate([
+                    self.centerXAvatar,
+                    self.centerYAvatar,
+                    self.widthAvatar,
+                    self.heightAvatar
+                ])
+
+                self.backView.alpha = 0.5
+                self.avatarImage.layer.cornerRadius = 0
+                self.layoutIfNeeded()
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.5) {
+                print("анимация кнопки")
+                self.closeButton.alpha = 1
+            }
+        }
+    }
+
+    private lazy var backView: UIView = {
         let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private lazy var contentStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.alignment = .top
-        stackView.distribution = .fill
-        stackView.spacing = 10
-        return stackView
+    private lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(tapCloseButton), for: .touchUpInside)
+        button.setImage(UIImage(named: "close_icon"), for: .normal)
+        button.alpha = 0
+        return button
     }()
 
     private lazy var nameLabel: UILabel = {
@@ -104,12 +158,11 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         let avatarImage = UIImage(named: "marty")
         let avatarView = UIImageView(image: avatarImage)
         avatarView.translatesAutoresizingMaskIntoConstraints = false
-        avatarView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        avatarView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         avatarView.clipsToBounds = true
         avatarView.layer.borderWidth = 3
         avatarView.layer.cornerRadius = 50
         avatarView.layer.borderColor = .init(red: 255, green: 255, blue: 255, alpha: 1)
+        avatarView.isUserInteractionEnabled = true
         return avatarView
     }()
 
@@ -157,5 +210,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     @objc private func statusTextChanged() {
         let newStatusText = statusTextField.text
         statusText = newStatusText
+    }
+
+    @objc private func tapCloseButton() {
+        //
     }
 }
