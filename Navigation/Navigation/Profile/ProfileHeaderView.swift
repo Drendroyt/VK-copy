@@ -18,11 +18,17 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    var leadingAvatar = NSLayoutConstraint()
+    var topAvatar = NSLayoutConstraint()
+    var trailingAvatar = NSLayoutConstraint()
+    var bottomAvatar = NSLayoutConstraint()
+
     func activateConstraints() {
 
         contentView.addSubview(contentStack)
         contentView.addSubview(statusButton)
-        contentStack.addArrangedSubview(avatarImage)
+        backImageView.addSubview(avatarImage)
+        contentStack.addArrangedSubview(backImageView)
         contentStack.addArrangedSubview(labelStack)
         labelStack.addArrangedSubview(nameLabel)
         labelStack.addArrangedSubview(statusLabel)
@@ -36,7 +42,26 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
         statusButton.topAnchor.constraint(equalTo: contentStack.bottomAnchor, constant: 16).isActive = true
         statusButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        topAvatar = avatarImage.topAnchor.constraint(equalTo: backImageView.topAnchor)
+        leadingAvatar = avatarImage.leadingAnchor.constraint(equalTo: backImageView.leadingAnchor)
+        trailingAvatar = avatarImage.trailingAnchor.constraint(equalTo: backImageView.trailingAnchor)
+        bottomAvatar = avatarImage.bottomAnchor.constraint(equalTo: backImageView.bottomAnchor)
+
+        NSLayoutConstraint.activate([
+            topAvatar,
+            leadingAvatar,
+            trailingAvatar,
+            bottomAvatar
+        ])
+
     }
+
+    private lazy var backImageView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     private lazy var contentStack: UIStackView = {
         let stackView = UIStackView()
@@ -75,7 +100,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return stackView
     }()
 
-    private lazy var avatarImage: UIImageView = {
+     lazy var avatarImage: UIImageView = {
         let avatarImage = UIImage(named: "marty")
         let avatarView = UIImageView(image: avatarImage)
         avatarView.translatesAutoresizingMaskIntoConstraints = false
