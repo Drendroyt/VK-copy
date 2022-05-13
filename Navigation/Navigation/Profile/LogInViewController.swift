@@ -41,7 +41,7 @@ class LogInViewController: UIViewController {
         textField.placeholder = "Email or phone"
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        textField.tintColor = UIColor(named: "AccentColor")
+        textField.tintColor = UIColor(named: "logInButtonColor")
         textField.autocapitalizationType = .none
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = paddingView
