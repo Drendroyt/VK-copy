@@ -140,43 +140,30 @@ class LogInViewController: UIViewController {
         let inset: CGFloat = 16
 
         view.addSubview(scrollView)
-
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-
         scrollView.addSubview(contentView)
-
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-        ])
 
         [loginInpunt, passwordInput].forEach { inputStackView.addArrangedSubview($0) }
 
         [logoImage, inputStackView, logInButton].forEach { contentView.addSubview($0) }
 
         NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             logoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logoImage.widthAnchor.constraint(equalToConstant: 100),
-            logoImage.heightAnchor.constraint(equalToConstant: 100)
-        ])
-
-        NSLayoutConstraint.activate([
+            logoImage.heightAnchor.constraint(equalToConstant: 100),
             inputStackView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
             inputStackView.heightAnchor.constraint(equalToConstant: 100),
             inputStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            inputStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset)
-        ])
-
-        NSLayoutConstraint.activate([
+            inputStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             logInButton.topAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: inset),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
