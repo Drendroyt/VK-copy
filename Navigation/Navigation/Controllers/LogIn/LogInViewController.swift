@@ -46,6 +46,7 @@ class LogInViewController: UIViewController {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = paddingView
         textField.leftViewMode = .always
+        textField.addTarget(self, action: #selector(refreshTextField), for: .editingDidBegin)
         return textField
     }()
 
@@ -66,8 +67,14 @@ class LogInViewController: UIViewController {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = paddingView
         textField.leftViewMode = .always
+        //textField.addTarget(self, action: #selector(refreshTextField), for: .editingDidBegin)
         return textField
     }()
+
+    @objc func refreshTextField(textField: UITextField) {
+        textField.attributedPlaceholder = nil
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+    }
 
     private lazy var inputStackView: UIStackView = {
         let stackView = UIStackView()
@@ -94,9 +101,14 @@ class LogInViewController: UIViewController {
     }()
 
     @objc private func logIn() {
-        let profileVC = ProfileViewController()
-        self.navigationController?.pushViewController(profileVC, animated: false)
-        view.endEditing(true)
+        if inputValidation().result {
+            let profileVC = ProfileViewController()
+            self.navigationController?.pushViewController(profileVC, animated: false)
+            view.endEditing(true)
+        } else {
+            view.endEditing(true)
+        }
+
     }
 
     override func viewDidLoad() {
@@ -171,5 +183,30 @@ class LogInViewController: UIViewController {
             logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
+
+    private func inputValidation() -> (result:Bool, empty: [UITextField], invalid: [UITextField]){
+        var emptyTextFieldArray: [UITextField] = []
+        var invalidTextFieldArray: [UITextField] = []
+        var result: Bool = true
+
+        if passwordInput.hasText {
+            //валидация на кол-во символов
+        } else {
+            emptyTextFieldArray.append(passwordInput)
+            passwordInput.layer.borderColor = UIColor.red.cgColor
+            passwordInput.attributedPlaceholder = NSAttributedString(string: "Введите пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            result = false
+        }
+        if loginInpunt.hasText {
+            // валидация
+        } else {
+            emptyTextFieldArray.append(loginInpunt)
+            loginInpunt.layer.borderColor = UIColor.red.cgColor
+            loginInpunt.attributedPlaceholder = NSAttributedString(string: "Введите логин", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            result = false
+        }
+        return (result, emptyTextFieldArray, invalidTextFieldArray)
+    }
+
 }
 
