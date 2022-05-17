@@ -51,15 +51,9 @@ class PhotosTableViewCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
             photosTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
-            photosTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset)
-        ])
-
-        NSLayoutConstraint.activate([
+            photosTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             arrowImageView.centerYAnchor.constraint(equalTo: photosTitle.centerYAnchor),
-            arrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset)
-        ])
-
-        NSLayoutConstraint.activate([
+            arrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             photosCollection.topAnchor.constraint(equalTo: photosTitle.bottomAnchor, constant: inset),
             photosCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             photosCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
@@ -67,7 +61,6 @@ class PhotosTableViewCell: UITableViewCell {
             photosCollection.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.25)
         ])
     }
-
 }
 
 extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {

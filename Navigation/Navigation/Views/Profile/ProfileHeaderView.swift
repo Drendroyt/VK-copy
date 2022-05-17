@@ -32,17 +32,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     func activateConstraints() {
         [labelStack, statusButton, backView, avatarImage, closeButton].forEach { contentView.addSubview($0) }
 
-        NSLayoutConstraint.activate([
-            backView.topAnchor.constraint(equalTo: self.topAnchor),
-            backView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            backView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            backView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height)
-        ])
-
-        NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            closeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
-        ])
+        [nameLabel, statusLabel, statusTextField].forEach { labelStack.addArrangedSubview($0) }
 
         leadingAvatar = avatarImage.leadingAnchor.constraint(equalTo:self.leadingAnchor, constant: 16)
         topAvatar = avatarImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
@@ -50,25 +40,23 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         heightAvatar = avatarImage.heightAnchor.constraint(equalToConstant: 100)
 
         NSLayoutConstraint.activate([
+            backView.topAnchor.constraint(equalTo: self.topAnchor),
+            backView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            backView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            backView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
+            closeButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            closeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            labelStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            labelStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: (16 + 100 + 10)),
+            labelStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusButton.topAnchor.constraint(equalTo: labelStack.bottomAnchor, constant: 16),
+            statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusButton.heightAnchor.constraint(equalToConstant: 50),
             leadingAvatar,
             topAvatar,
             widthAvatar,
             heightAvatar
-        ])
-
-        [nameLabel, statusLabel, statusTextField].forEach { labelStack.addArrangedSubview($0) }
-
-        NSLayoutConstraint.activate([
-            labelStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            labelStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: (16 + 100 + 10)),
-            labelStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
-        ])
-
-        NSLayoutConstraint.activate([
-            statusButton.topAnchor.constraint(equalTo: labelStack.bottomAnchor, constant: 16),
-            statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            statusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 
