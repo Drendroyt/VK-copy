@@ -11,6 +11,14 @@ class LogInViewController: UIViewController {
 
     private let nc = NotificationCenter.default
 
+    private lazy var inputAlertLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Ваш пароль слишком короткий"
+        label.textColor = .red
+        return label
+    }()
+
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,19 +75,28 @@ class LogInViewController: UIViewController {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = paddingView
         textField.leftViewMode = .always
-        //textField.addTarget(self, action: #selector(refreshTextField), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(refreshTextField), for: .editingDidBegin)
         return textField
     }()
 
     @objc func refreshTextField(textField: UITextField) {
         textField.attributedPlaceholder = nil
+        switch textField {
+        case passwordInput:
+            textField.placeholder = "Password"
+            inputAlertLabel.removeFromSuperview()
+        case loginInpunt:
+            textField.placeholder = "Email or phone"
+        default:
+            textField.placeholder = nil
+        }
         textField.layer.borderColor = UIColor.lightGray.cgColor
     }
 
     private lazy var inputStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -173,7 +190,8 @@ class LogInViewController: UIViewController {
             logoImage.widthAnchor.constraint(equalToConstant: 100),
             logoImage.heightAnchor.constraint(equalToConstant: 100),
             inputStackView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
-            inputStackView.heightAnchor.constraint(equalToConstant: 100),
+            passwordInput.heightAnchor.constraint(equalToConstant: 50),
+            loginInpunt.heightAnchor.constraint(equalToConstant: 50),
             inputStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             inputStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             logInButton.topAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: inset),
@@ -184,13 +202,17 @@ class LogInViewController: UIViewController {
         ])
     }
 
-    private func inputValidation() -> (result:Bool, empty: [UITextField], invalid: [UITextField]){
+    private func inputValidation() -> (result:Bool, empty: [UITextField]){
         var emptyTextFieldArray: [UITextField] = []
-        var invalidTextFieldArray: [UITextField] = []
         var result: Bool = true
+        let minPasswordLength = 6
 
         if passwordInput.hasText {
-            //валидация на кол-во символов
+            if passwordInput.text!.count < minPasswordLength {
+                passwordInput.layer.borderColor = UIColor.red.cgColor
+                inputStackView.addArrangedSubview(inputAlertLabel)
+                result = false
+            }
         } else {
             emptyTextFieldArray.append(passwordInput)
             passwordInput.layer.borderColor = UIColor.red.cgColor
@@ -198,14 +220,14 @@ class LogInViewController: UIViewController {
             result = false
         }
         if loginInpunt.hasText {
-            // валидация
+            // валидация email
         } else {
             emptyTextFieldArray.append(loginInpunt)
             loginInpunt.layer.borderColor = UIColor.red.cgColor
             loginInpunt.attributedPlaceholder = NSAttributedString(string: "Введите логин", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
             result = false
         }
-        return (result, emptyTextFieldArray, invalidTextFieldArray)
+        return (result, emptyTextFieldArray)
     }
 
 }
