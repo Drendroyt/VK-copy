@@ -118,7 +118,7 @@ class LogInViewController: UIViewController {
     }()
 
     @objc private func logIn() {
-        if inputValidation().result {
+        if inputValidation() {
             let profileVC = ProfileViewController()
             self.navigationController?.pushViewController(profileVC, animated: false)
             view.endEditing(true)
@@ -202,10 +202,11 @@ class LogInViewController: UIViewController {
         ])
     }
 
-    private func inputValidation() -> (result:Bool, empty: [UITextField]){
-        var emptyTextFieldArray: [UITextField] = []
+    private func inputValidation() -> Bool {
         var result: Bool = true
         let minPasswordLength = 6
+        let correctLogin = "Drendroyt"
+        let correctPassword = "123456"
 
         if passwordInput.hasText {
             if passwordInput.text!.count < minPasswordLength {
@@ -214,20 +215,39 @@ class LogInViewController: UIViewController {
                 result = false
             }
         } else {
-            emptyTextFieldArray.append(passwordInput)
             passwordInput.layer.borderColor = UIColor.red.cgColor
             passwordInput.attributedPlaceholder = NSAttributedString(string: "Введите пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
             result = false
         }
+
         if loginInpunt.hasText {
             // валидация email
         } else {
-            emptyTextFieldArray.append(loginInpunt)
             loginInpunt.layer.borderColor = UIColor.red.cgColor
             loginInpunt.attributedPlaceholder = NSAttributedString(string: "Введите логин", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
             result = false
         }
-        return (result, emptyTextFieldArray)
+
+        if loginInpunt.text != correctLogin, passwordInput.text != correctPassword, result {
+            lazy var logInAlert: UIAlertController = {
+                let alert = UIAlertController(
+                    title: "Внимание",
+                    message: "Вы ввели некорретный логин/пароль. Попробуйте еще раз",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "ОК",
+                                              style: .cancel,
+                                              handler: {_ in
+                    self.dismiss(animated: true, completion: nil)
+                }))
+                return alert
+            }()
+
+            self.present(logInAlert, animated: true)
+            result = false
+        }
+
+        return result
     }
 
 }

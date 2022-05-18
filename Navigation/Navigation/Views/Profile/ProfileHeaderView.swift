@@ -171,10 +171,13 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }()
 
     @objc private func didTapStatusButton() {
-        print("Статус до изменения: \(statusLabel.text ?? "Статус пустой")")
-        statusLabel.text = statusText
-        print("Статус после изменения: \(statusLabel.text ?? "Статус пустой")")
-        self.endEditing(true)
+        if inputValidation() {
+            print("Статус до изменения: \(statusLabel.text ?? "Статус пустой")")
+            statusLabel.text = statusText
+            print("Статус после изменения: \(statusLabel.text ?? "Статус пустой")")
+            self.endEditing(true)
+            refreshTextField(textField: statusTextField)
+        }
     }
 
     private var statusText: String?
@@ -182,13 +185,14 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     lazy var statusTextField: UITextField = {
         let textField = UITextField()
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+        textField.layer.borderColor = UIColor.black.cgColor
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 12
         textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         textField.textColor = .black
         textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        textField.addTarget(self, action: #selector(refreshTextField), for: .editingDidBegin)
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = paddingView
         textField.leftViewMode = .always
@@ -199,6 +203,12 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     @objc private func statusTextChanged() {
         let newStatusText = statusTextField.text
         statusText = newStatusText
+    }
+
+    @objc func refreshTextField(textField: UITextField) {
+        textField.attributedPlaceholder = nil
+        textField.placeholder = "Set your status..."
+        textField.layer.borderColor = UIColor.black.cgColor
     }
 
     @objc private func tapCloseButton() {
@@ -231,4 +241,19 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             self.delegate?.profileTableView.isScrollEnabled = true
         }
     }
+
+    private func inputValidation() -> Bool {
+        var result: Bool = true
+
+        if statusTextField.hasText == false {
+            statusTextField.layer.borderColor = UIColor.red.cgColor
+            statusTextField.attributedPlaceholder = NSAttributedString(
+                string: "Введите статус",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red]
+            )
+            result = false
+        }
+        return result
+    }
+
 }
