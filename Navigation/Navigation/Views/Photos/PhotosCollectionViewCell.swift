@@ -28,6 +28,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
 
     private func layout() {
         contentView.addSubview(photoView)
+        contentView.backgroundColor = .white
 
         NSLayoutConstraint.activate([
             photoView.topAnchor.constraint(equalTo: contentView.topAnchor),
