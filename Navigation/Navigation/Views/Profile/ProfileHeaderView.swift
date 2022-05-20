@@ -27,7 +27,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     var heightAvatar = NSLayoutConstraint()
     var centerXAvatar = NSLayoutConstraint()
     var centerYAvatar = NSLayoutConstraint()
-    var centerAvatar = NSLayoutConstraint()
 
     func activateConstraints() {
         [labelStack, statusButton, backView, avatarImage, closeButton].forEach { contentView.addSubview($0) }
