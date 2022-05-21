@@ -9,6 +9,8 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
+    var indexPath: IndexPath = IndexPath()
+
     private lazy var postTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -23,6 +25,7 @@ class PostTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
 
@@ -40,6 +43,7 @@ class PostTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .black
+        label.isUserInteractionEnabled = true
         return label
     }()
 
@@ -54,6 +58,7 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
+        setupGestures()
     }
 
     required init?(coder: NSCoder) {
@@ -66,6 +71,23 @@ class PostTableViewCell: UITableViewCell {
         postDescription.text = post.description
         likeLabel.text = "Likes: \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
+    }
+
+    func setupGestures() {
+        let tapPhotoGesture = UITapGestureRecognizer(target: self, action: #selector(countNewView))
+        let tapLikesGesture = UITapGestureRecognizer(target: self, action: #selector(countNewLike))
+        postImageView.addGestureRecognizer(tapPhotoGesture)
+        likeLabel.addGestureRecognizer(tapLikesGesture)
+    }
+
+    @objc private func countNewView() {
+        postArray[indexPath.row].views += 1
+        viewsLabel.text = "Views: \(postArray[indexPath.row].views)"
+    }
+
+    @objc private func countNewLike() {
+        postArray[indexPath.row].likes += 1
+        likeLabel.text = "Likes: \(postArray[indexPath.row].likes)"
     }
 
     private func layout() {
