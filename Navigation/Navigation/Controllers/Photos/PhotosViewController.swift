@@ -53,7 +53,6 @@ class PhotosViewController: UIViewController {
     }
 
     private func tapPhotoGesture(cell: PhotosCollectionViewCell?) {
-        print(#function)
         if let cell = cell {
             cell.photoView.removeFromSuperview()
             self.view.addSubview(cell.photoView)
@@ -108,7 +107,7 @@ class PhotosViewController: UIViewController {
     }
 
     @objc func tapCloseButton() {
-        print(#function)
+        self.navigationItem.rightBarButtonItem = nil
         if let photoView = delegate?.photoView, let contentView = delegate?.contentView, let delegate = delegate {
             photoView.removeFromSuperview()
             contentView.addSubview(photoView)
