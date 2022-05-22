@@ -118,7 +118,8 @@ class LogInViewController: UIViewController {
     }()
 
     @objc private func logIn() {
-        if inputValidation() {
+        let result = inputValidation()
+        if result {
             let profileVC = ProfileViewController()
             self.navigationController?.pushViewController(profileVC, animated: false)
             view.endEditing(true)
@@ -228,7 +229,7 @@ class LogInViewController: UIViewController {
             result = false
         }
 
-        if loginInpunt.text != correctLogin, passwordInput.text != correctPassword, result {
+        if result, (loginInpunt.text != correctLogin || passwordInput.text != correctPassword) {
             lazy var logInAlert: UIAlertController = {
                 let alert = UIAlertController(
                     title: "Внимание",
