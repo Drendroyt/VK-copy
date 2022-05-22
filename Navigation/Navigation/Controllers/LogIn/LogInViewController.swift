@@ -205,7 +205,7 @@ class LogInViewController: UIViewController {
     private func inputValidation() -> Bool {
         var result: Bool = true
         let minPasswordLength = 6
-        let correctLogin = "Drendroyt"
+        let correctLogin = "Drendroyt@mail.ru"
         let correctPassword = "123456"
 
         if passwordInput.hasText {
