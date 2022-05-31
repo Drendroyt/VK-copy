@@ -1,25 +1,51 @@
 //
-//  PostTableViewCell.swift
+//  DetailPostViewController.swift
 //  Navigation
 //
-//  Created by Кирилл Дамковский on 01.05.2022.
+//  Created by Кирилл Дамковский on 21.05.2022.
 //
 
 import UIKit
 
-class PostTableViewCell: UITableViewCell {
+class DetailPostViewController: UIViewController {
 
     var indexPath: IndexPath = IndexPath()
-    weak var delegate: ProfileViewController?
+    weak var delegate: PostTableViewCell?
 
-    private lazy var postTitle: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
-        label.numberOfLines = 2
-        return label
-    }()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+      }()
+
+    private lazy var contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+      }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        layout()
+        view.backgroundColor = .white
+        setupGestures()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+
+    private func setupNavigationBar() {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.title = postArray[indexPath.row].author
+    }
 
     private lazy var postImageView: UIImageView = {
         let imageView = UIImageView()
@@ -39,8 +65,7 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
 
-
-    lazy var likeLabel: UILabel = {
+    private lazy var likeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
@@ -57,18 +82,7 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        layout()
-        setupGestures()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func setupCell(_ post: Post) {
-        postTitle.text = post.author
+    func setupView(_ post: Post) {
         postImageView.image = UIImage(named: post.image)
         postDescription.text = post.description
         likeLabel.text = "Likes: \(post.likes)"
@@ -76,41 +90,39 @@ class PostTableViewCell: UITableViewCell {
     }
 
     func setupGestures() {
-        let tapPhotoGesture = UITapGestureRecognizer(target: self, action: #selector(countNewView))
         let tapLikesGesture = UITapGestureRecognizer(target: self, action: #selector(countNewLike))
-        postImageView.addGestureRecognizer(tapPhotoGesture)
         likeLabel.addGestureRecognizer(tapLikesGesture)
-    }
-
-    @objc private func countNewView() {
-        postArray[indexPath.row].views += 1
-        viewsLabel.text = "Views: \(postArray[indexPath.row].views)"
-        if let delegate = delegate {
-            let detailPostVC = DetailPostViewController()
-            detailPostVC.setupView(postArray[indexPath.row])
-            detailPostVC.indexPath = indexPath
-            detailPostVC.delegate = self
-            delegate.navigationController?.pushViewController(detailPostVC, animated: true)
-        }
     }
 
     @objc private func countNewLike() {
         postArray[indexPath.row].likes += 1
         likeLabel.text = "Likes: \(postArray[indexPath.row].likes)"
+        if let delegate = delegate {
+            delegate.likeLabel.text = "Likes: \(postArray[indexPath.row].likes)"
+            print("update count")
+        }
     }
 
     private func layout() {
 
-        [postTitle, postImageView, postDescription, likeLabel, viewsLabel].forEach { contentView.addSubview($0) }
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+
+        [postImageView, postDescription, likeLabel, viewsLabel].forEach { contentView.addSubview($0) }
 
         let inset: CGFloat = 16
-        let viewInset: CGFloat = 12
 
         NSLayoutConstraint.activate([
-            postTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
-            postTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            postTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            postTitle.bottomAnchor.constraint(equalTo: postImageView.topAnchor, constant: -viewInset),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            postImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             postImageView.bottomAnchor.constraint(equalTo: postDescription.topAnchor, constant: -inset),
@@ -125,4 +137,5 @@ class PostTableViewCell: UITableViewCell {
             viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset)
         ])
     }
+
 }

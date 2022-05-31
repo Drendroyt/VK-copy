@@ -9,7 +9,7 @@ import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
 
-    private lazy var photoView: UIImageView = {
+    lazy var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
@@ -28,6 +28,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
 
     private func layout() {
         contentView.addSubview(photoView)
+        contentView.backgroundColor = .white
 
         NSLayoutConstraint.activate([
             photoView.topAnchor.constraint(equalTo: contentView.topAnchor),

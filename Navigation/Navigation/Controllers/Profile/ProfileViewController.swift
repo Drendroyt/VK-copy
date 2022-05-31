@@ -64,8 +64,8 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
-            let detailVC = PhotosViewController()
-            navigationController?.pushViewController(detailVC, animated: true)
+            let photoGalleryVC = PhotosViewController()
+            navigationController?.pushViewController(photoGalleryVC, animated: true)
         }
     }
 }
@@ -91,6 +91,9 @@ extension ProfileViewController: UITableViewDataSource {
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
             cell.setupCell(postArray[indexPath.row])
+            cell.indexPath = indexPath
+            cell.selectionStyle = .none
+            cell.delegate = self
             return cell
         }
     }
